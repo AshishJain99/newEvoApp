@@ -43,6 +43,8 @@ class ViewController: UIViewController {
     var mainCollectionImageWidth:CGFloat = 0
     var mainCollectionLabelHeight:CGFloat = 0
     
+    var collectionViewHeight :CGFloat = 200
+    
     let deviceType = UIDevice.current.userInterfaceIdiom
     
     override func viewDidLoad() {
@@ -62,10 +64,10 @@ class ViewController: UIViewController {
         if deviceType == .pad{
             
             headerViewHeight.constant = 50*2
-            recommendedViewHeight.constant = 200*2
-            featuredViewHeight.constant = 200*2
-            categoriesViewHeight.constant = 200*2
-            scrollViewVHeight.constant = 600*2
+            recommendedViewHeight.constant = collectionViewHeight*2
+            featuredViewHeight.constant = collectionViewHeight*2
+            categoriesViewHeight.constant = collectionViewHeight*2
+            scrollViewVHeight.constant = collectionViewHeight*3*2
             
             mainCollectionImageHeights = (100*2)+50
             mainCollectionImageWidth = 200*2
@@ -82,16 +84,28 @@ class ViewController: UIViewController {
         }else if deviceType == .phone{
             
             headerViewHeight.constant = 50
-            recommendedViewHeight.constant = 200
-            featuredViewHeight.constant = 200
-            categoriesViewHeight.constant = 200
-            scrollViewVHeight.constant = 600
+            recommendedViewHeight.constant = collectionViewHeight
+            featuredViewHeight.constant = collectionViewHeight
+            categoriesViewHeight.constant = collectionViewHeight
+            scrollViewVHeight.constant = collectionViewHeight*3
             
             mainCollectionImageHeights = 100
             mainCollectionImageWidth = 200
             mainCollectionLabelHeight = 40
             
         }
+    }
+    
+    @IBAction func nextButtonPressed(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController {
+
+            // Push the new view controller onto the navigation stack
+            navigationController?.pushViewController(nextViewController, animated: true)
+        }
+        
+//        print("nextt")
     }
     
     
@@ -150,7 +164,7 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: mainCollectionImageWidth, height: mainCollectionImageHeights)
+        return CGSize(width: mainCollectionImageWidth, height: collectionViewHeight)
     }
 }
 
