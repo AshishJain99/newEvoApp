@@ -53,8 +53,8 @@ class ViewController: UIViewController {
         
         fetchData()
         configureUI()
-        getFeaturedResponse()
-        getCategories()
+//        getFeaturedResponse()
+//        getCategories()
     }
     
     
@@ -162,6 +162,35 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
             return cell
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == recommendedCollectionV{
+            
+            let data = allRecommended[indexPath.item]
+            let coverImage = recommendedCellData[indexPath.item].image
+            let detailedVcData = detailedVcData(image1Url: data.Screenshot1 ?? "", image2Url: data.Screenshot2 ?? "", image3Url: data.Screenshot3 ?? "", image4Url: data.Screenshot4 ?? "", appName: data.AppName ?? "", devName: data.Author ?? "", appIconUrl: data.Icon ?? "", description: data.Description ?? "", downloadLink: data.IosStoreLink ?? "",price: data.IosINR ?? "",adultRaiting: data.IosInstallCount ?? "", appRating: data.IosRatings ?? "", bgImg: coverImage)
+            
+            
+            if let nextViewController = storyboard!.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController {
+                
+                nextViewController.detailedVcData = detailedVcData
+//                nextViewController.bgImageV =
+                
+                // Push the new view controller onto the navigation stack
+                navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            
+        }else if collectionView == featuredCollectionV{
+            print(featuredCellData.count,"featuredData")
+            
+        }else{
+            
+        }
+    }
+    
+    
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: mainCollectionImageWidth, height: collectionViewHeight)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct RecommendedApiResponse: Codable {
     let Recommended: [Recommended]?
@@ -229,5 +230,25 @@ struct Genre {
     let name: String
 }
 
-
+struct detailedVcData{
     
+    let image1Url:String
+    let image2Url:String
+    let image3Url:String
+    let image4Url:String
+    
+    let appName:String
+    let devName:String
+    
+    let appIconUrl:String
+    
+    let description:String
+    
+    let downloadLink:String
+    
+    let price:String
+    let adultRaiting:String
+    let appRating:String
+    
+    let bgImg:UIImage
+}
