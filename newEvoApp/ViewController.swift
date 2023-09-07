@@ -31,7 +31,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchButtonView:UIView!
     @IBOutlet weak var giftButtonView:UIView!
     
+    @IBOutlet weak var controllerStatusIcon:UIImageView!
+    @IBOutlet weak var wifiStatusIcon:UIImageView!
+    @IBOutlet weak var batteryStatusIcon:UIImageView!
     
+    @IBOutlet weak var batteryPercentLabel:UILabel!
+    @IBOutlet weak var timeLabel:UILabel!
     
     
     var allRecommended:[Recommended] = []
@@ -54,6 +59,9 @@ class ViewController: UIViewController {
     
     let deviceType = UIDevice.current.userInterfaceIdiom
     
+    let topVData = TopBarViewFile()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -64,6 +72,22 @@ class ViewController: UIViewController {
         getCategories()
         addButtonAction()
         
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let batteryImage = topVData.getBatteryImage()
+        let batteryPercent = topVData.getBatteryPercentage()
+        let controllerStatus = topVData.getConsollerStatus()
+        let connectivityType = topVData.getNetworkConnectivityType()
+        let time = topVData.getTime()
+        
+        controllerStatusIcon.image = controllerStatus
+        wifiStatusIcon.image = connectivityType
+        batteryStatusIcon.image = batteryImage
+        
+        batteryPercentLabel.text = batteryPercent
+        timeLabel.text = time
     }
     
     
