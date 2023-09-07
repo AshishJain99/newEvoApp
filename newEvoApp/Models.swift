@@ -252,3 +252,60 @@ struct detailedVcData{
     
     let bgImg:UIImage
 }
+
+struct searchResponseApi: Codable {
+    let Search: [Search]?
+
+    enum CodingKeys: String, CodingKey {
+        case Search = "Search"
+    }
+}
+
+// MARK: - Search
+struct Search: Codable {
+    let Id, AppName, Category, Language: String?
+    let Author, Description: String?
+    let LastUpdated: String?
+    let Icon: String?
+    let CoverImage, Screenshot1, Screenshot2, Screenshot3: String?
+    let Screenshot4: String?
+    let VideoLink, Featured, Recomended, IosID: String?
+    let IosPackageName: String?
+    let IosStoreLink: String?
+    let IosSupportVersion, IosSize, IosVersion, IosRatings: String?
+    let IosINR, IosInstallCount, IosRemarks: String?
+
+    enum CodingKeys: String, CodingKey {
+        case Id = "Id"
+        case AppName = "AppName"
+        case Category = "Category"
+        case Language = "Language"
+        case Author = "Author"
+        case Description = "Description"
+        case LastUpdated = "LastUpdated"
+        case Icon = "Icon"
+        case CoverImage = "CoverImage"
+        case Screenshot1 = "Screenshot1"
+        case Screenshot2 = "Screenshot2"
+        case Screenshot3 = "Screenshot3"
+        case Screenshot4 = "Screenshot4"
+        case VideoLink = "VideoLink"
+        case Featured = "Featured"
+        case Recomended = "Recomended"
+        case IosID = "IosId"
+        case IosPackageName = "IosPackageName"
+        case IosStoreLink = "IosStoreLink"
+        case IosSupportVersion = "IosSupportVersion"
+        case IosSize = "IosSize"
+        case IosVersion = "IosVersion"
+        case IosRatings = "IosRatings"
+        case IosINR = "IosINR"
+        case IosInstallCount = "IosInstallCount"
+        case IosRemarks = "IosRemarks"
+    }
+}
+
+struct HomeViewCellData{
+    let image:UIImage
+    let Label:String
+}

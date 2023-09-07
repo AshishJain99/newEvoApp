@@ -129,11 +129,28 @@ class GetApiResponse {
     }
 
 
-    
+    func getImageFromString(url: String, completion: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global().async {
+            if let imageUrl = URL(string: url) {
+                do {
+                    let imageData = try Data(contentsOf: imageUrl)
+                    let image = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        completion(image)
+                    }
+                } catch {
+                    print("Error fetching the image: \(error)")
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
 }
 
 
-struct HomeViewCellData{
-    let image:UIImage
-    let Label:String
-}

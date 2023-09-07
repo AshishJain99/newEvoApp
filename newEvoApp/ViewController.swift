@@ -99,7 +99,7 @@ class ViewController: UIViewController {
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController {
+        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "searchViewController") as? searchViewController {
 
             // Push the new view controller onto the navigation stack
             navigationController?.pushViewController(nextViewController, animated: true)

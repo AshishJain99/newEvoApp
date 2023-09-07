@@ -7,8 +7,8 @@
 
 import UIKit
 
-class DetailedViewController: UIViewController {
-
+class DetailedViewController: UIViewController, UITextViewDelegate {
+    
     @IBOutlet weak var bgImageV: UIImageView!
     
     @IBOutlet weak var ImageV1: UIImageView!
@@ -21,6 +21,10 @@ class DetailedViewController: UIViewController {
     @IBOutlet weak var gameNameLabel: UILabel!
     @IBOutlet weak var downloadButtonView: UIView!
     
+    @IBOutlet weak var adultRatitngView: UIView!
+    @IBOutlet weak var priceView: UIView!
+    @IBOutlet weak var ratingsView: UIView!
+    
     
     @IBOutlet weak var adultRatingCountLabel: UILabel!
     @IBOutlet weak var RatingCountLabel: UILabel!
@@ -31,19 +35,51 @@ class DetailedViewController: UIViewController {
     
     var detailedVcData:detailedVcData!
     
+    @IBOutlet weak var backButtonView: UIView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    let getApiResponse = GetApiResponse()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        print(detailedVcData)
+        
+        //        print(detailedVcData)
         
         // Do any additional setup after loading the view.
         setData()
+        configureUI()
+        headerViewHeight.constant = 50
+        
+        let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        backButtonView.addGestureRecognizer(backButtonTap)
+        descriptionTextView.delegate = self
+        descriptionTextView.isScrollEnabled = true
+        
     }
     
     
     
-
+    func configureUI(){
+        downloadButtonView.layer.cornerRadius = 8
+        appIcon.layer.cornerRadius = 8
+        let borderWidth = 2.0
+        let borderColor = UIColor.red.cgColor
+        ratingsView.layer.borderWidth = borderWidth
+        ratingsView.layer.borderColor = borderColor
+        
+        priceCountLabel.layer.borderWidth = borderWidth
+        priceCountLabel.layer.borderColor = borderColor
+        
+        adultRatitngView.layer.borderWidth = borderWidth
+        adultRatitngView.layer.borderColor = borderColor
+    }
+    
+    @objc func backButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
 }
 
 
@@ -55,42 +91,39 @@ extension DetailedViewController{
         gameNameLabel.text = data?.appName
         adultRatingCountLabel.text = data?.adultRaiting
         RatingCountLabel.text = data?.appRating
-        priceCountLabel.text = data?.price
+        if let price = data?.price{
+            priceCountLabel.text = price+" ₹"
+        }
+        descriptionTextView.text = data?.description
+        
         bgImageV.image = data?.bgImg
         
-
         
-        if let imageUrl = URL(string: data?.appIconUrl ?? "") {
-            do {
-                let imageData = try Data(contentsOf: imageUrl)
-                let image = UIImage(data: imageData)
-                // Do something with the image, e.g., set it to an UIImageView
-                appIcon.image = image
-            } catch {
-                print("Error fetching the image: \(error)")
+        //        getApiResponse
+        getApiResponse.getImageFromString(url: data?.appIconUrl ?? "") { [weak self] image in
+            guard let self = self else{
+                return
             }
+            self.appIcon.image = image
         }
         
+        
         for imageUrlString in imgUrlArray {
-            if let imageUrl = URL(string: imageUrlString ?? "") {
-                        do {
-                            let imageData = try Data(contentsOf: imageUrl)
-                            let image = UIImage(data: imageData)
-                            
-                            if ImageV1.image == nil{
-                                ImageV1.image = image
-                            }else if ImageV2.image == nil{
-                                ImageV2.image = image
-                            }else if ImageV3.image == nil{
-                                ImageV3.image = image
-                            }else if ImageV4.image == nil{
-                                ImageV4.image = image
-                            }
-                            
-                        } catch {
-                            print("Error fetching the image: \(error)")
-                        }
-                    }
+            getApiResponse.getImageFromString(url: imageUrlString ?? "") {[weak self] image in
+                guard let self = self else{
+                    return
+                }
+                if ImageV1.image == nil{
+                    ImageV1.image = image
+                }else if ImageV2.image == nil{
+                    ImageV2.image = image
+                }else if ImageV3.image == nil{
+                    ImageV3.image = image
+                }else if ImageV4.image == nil{
+                    ImageV4.image = image
+                }
+            }
+            
         }
     }
 }
