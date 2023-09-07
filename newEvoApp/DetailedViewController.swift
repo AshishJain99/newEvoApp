@@ -56,6 +56,10 @@ class DetailedViewController: UIViewController, UITextViewDelegate {
         descriptionTextView.delegate = self
         descriptionTextView.isScrollEnabled = true
         
+        let downloadButtonTap = UITapGestureRecognizer(target: self, action: #selector(downloadButtonTapped))
+        downloadButtonView.addGestureRecognizer(downloadButtonTap)
+        
+        
     }
     
     
@@ -79,7 +83,17 @@ class DetailedViewController: UIViewController, UITextViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
+    @objc func downloadButtonTapped(){
+        let iosLink = detailedVcData.downloadLink
+//        if let appStoreURL = URL(string: "https://apps.apple.com/app/\(tempIosId)") {
+        if let appStoreURL = URL(string: iosLink ?? "") {
+            UIApplication.shared.open(appStoreURL, options: [:], completionHandler: nil)
+            print(appStoreURL)
+        }
+    }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 
@@ -96,7 +110,10 @@ extension DetailedViewController{
         }
         descriptionTextView.text = data?.description
         
-        bgImageV.image = data?.bgImg
+        if let bgImg = data?.bgImg{
+            bgImageV.image = bgImg
+        }
+        
         
         
         //        getApiResponse

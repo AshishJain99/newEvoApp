@@ -27,13 +27,20 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var recommendedCollectionVH: NSLayoutConstraint!
     
+    @IBOutlet weak var evoButtonView:UIView!
+    @IBOutlet weak var searchButtonView:UIView!
+    @IBOutlet weak var giftButtonView:UIView!
+    
+    
     
     
     var allRecommended:[Recommended] = []
     var recommendedCellData:[HomeViewCellData] = []
+    var recommendedDataFiltered:[Recommended] = []
     
     var allFeatured:[Featured] = []
     var featuredCellData:[HomeViewCellData] = []
+    var featuredDataFiltered:[Featured] = []
     
     var allCategories: [Genre] = []
     
@@ -53,27 +60,37 @@ class ViewController: UIViewController {
         
         fetchData()
         configureUI()
-//        getFeaturedResponse()
-//        getCategories()
+        getFeaturedResponse()
+        getCategories()
+        addButtonAction()
+        
     }
     
     
+    func addButtonAction(){
+        let evoButtonTapGesture = UITapGestureRecognizer(target: self, action: #selector(evoButtonTapped))
+        evoButtonView.addGestureRecognizer(evoButtonTapGesture)
+        let searchButtonTapGesture = UITapGestureRecognizer(target: self, action: #selector(searchButtonTapped))
+        searchButtonView.addGestureRecognizer(searchButtonTapGesture)
+        
+        giftButtonView.isHidden = true
+    }
     
     func configureUI(){
         
         if deviceType == .pad{
             
-            headerViewHeight.constant = 50*2
-            recommendedViewHeight.constant = collectionViewHeight*2
-            featuredViewHeight.constant = collectionViewHeight*2
-            categoriesViewHeight.constant = collectionViewHeight*2
-            scrollViewVHeight.constant = collectionViewHeight*3*2
+            headerViewHeight.constant = 50*1.2
+            recommendedViewHeight.constant = collectionViewHeight*1.2
+            featuredViewHeight.constant = collectionViewHeight*1.2
+            categoriesViewHeight.constant = (collectionViewHeight*1.2)*0.8
+            scrollViewVHeight.constant = collectionViewHeight*3*1.2
             
-            mainCollectionImageHeights = (100*2)+50
-            mainCollectionImageWidth = 200*2
-            mainCollectionLabelHeight = 40*2
+            mainCollectionImageHeights = 100*1.5
+            mainCollectionImageWidth = 200*1.5
+            mainCollectionLabelHeight = 40
             
-            let fontSize:CGFloat = 19*2
+            let fontSize:CGFloat = 19*1.2
             
             recommendedLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
             featuredLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
@@ -86,14 +103,42 @@ class ViewController: UIViewController {
             headerViewHeight.constant = 50
             recommendedViewHeight.constant = collectionViewHeight
             featuredViewHeight.constant = collectionViewHeight
-            categoriesViewHeight.constant = collectionViewHeight
-            scrollViewVHeight.constant = collectionViewHeight*3
+            categoriesViewHeight.constant = collectionViewHeight*0.8
+            scrollViewVHeight.constant = (collectionViewHeight*3)-20
             
             mainCollectionImageHeights = 100
             mainCollectionImageWidth = 200
             mainCollectionLabelHeight = 40
             
         }
+    }
+    
+    
+    @objc func evoButtonTapped(){
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "aboutViewController") as? aboutViewController {
+
+            // Push the new view controller onto the navigation stack
+            navigationController?.pushViewController(nextViewController, animated: true)
+        }
+        
+        
+    }
+    
+    
+    @objc func searchButtonTapped(){
+       
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "searchViewController") as? searchViewController {
+
+            // Push the new view controller onto the navigation stack
+            navigationController?.pushViewController(nextViewController, animated: true)
+        }
+        
+        
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
@@ -109,7 +154,9 @@ class ViewController: UIViewController {
     }
     
     
-    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -158,7 +205,10 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
             cell.categoryTextView.textColor = .white
             cell.imageVHeight.constant = mainCollectionImageHeights
             cell.imageVWidth.constant = mainCollectionImageWidth
+            cell.labelVHeight.constant = mainCollectionImageHeights
             cell.labelVWidth.constant = mainCollectionImageWidth
+            
+//            cell.categoryTextView.backgroundColor = .white
             return cell
         }
     }
@@ -166,7 +216,7 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == recommendedCollectionV{
             
-            let data = allRecommended[indexPath.item]
+            let data = recommendedDataFiltered[indexPath.item]
             let coverImage = recommendedCellData[indexPath.item].image
             let detailedVcData = detailedVcData(image1Url: data.Screenshot1 ?? "", image2Url: data.Screenshot2 ?? "", image3Url: data.Screenshot3 ?? "", image4Url: data.Screenshot4 ?? "", appName: data.AppName ?? "", devName: data.Author ?? "", appIconUrl: data.Icon ?? "", description: data.Description ?? "", downloadLink: data.IosStoreLink ?? "",price: data.IosINR ?? "",adultRaiting: data.IosInstallCount ?? "", appRating: data.IosRatings ?? "", bgImg: coverImage)
             
@@ -183,8 +233,42 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
         }else if collectionView == featuredCollectionV{
             print(featuredCellData.count,"featuredData")
             
-        }else{
+            let data = featuredDataFiltered[indexPath.item]
+            let coverImage = featuredCellData[indexPath.item].image
+            let detailedVcData = detailedVcData(image1Url: data.Screenshot1 ?? "", image2Url: data.Screenshot2 ?? "", image3Url: data.Screenshot3 ?? "", image4Url: data.Screenshot4 ?? "", appName: data.AppName ?? "", devName: data.Author ?? "", appIconUrl: data.Icon ?? "", description: data.Description ?? "", downloadLink: data.IosStoreLink ?? "",price: data.IosINR ?? "",adultRaiting: data.IosInstallCount ?? "", appRating: data.IosRatings ?? "", bgImg: coverImage)
             
+            
+            if let nextViewController = storyboard!.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController {
+                
+                nextViewController.detailedVcData = detailedVcData
+//                nextViewController.bgImageV =
+                
+                // Push the new view controller onto the navigation stack
+                navigationController?.pushViewController(nextViewController, animated: true)
+            }
+            
+            
+        }else{
+            let category = allCategories[indexPath.row].name
+            
+            getApiResponse.fetchCategoriesData(category: category){[weak self] data in
+                
+                guard let self = self else{
+                    return
+                }
+                if let nextViewController = storyboard!.instantiateViewController(withIdentifier: "searchViewController") as? searchViewController {
+                    
+                    nextViewController.allCategory = data
+                    nextViewController.searchDisable = true
+    //                nextViewController.bgImageV =
+                    print(data?.count)
+                    print("")
+                    // Push the new view controller onto the navigation stack
+                    
+                    navigationController?.pushViewController(nextViewController, animated: true)
+                }
+                
+            }
         }
     }
     
@@ -193,7 +277,13 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: mainCollectionImageWidth, height: collectionViewHeight)
+        
+        if collectionView == categoryCollectionV{
+            return CGSize(width: mainCollectionImageWidth, height: collectionViewHeight*0.6)
+        }else{
+            return CGSize(width: mainCollectionImageWidth, height: collectionViewHeight)
+        }
+        
     }
 }
 
@@ -225,6 +315,7 @@ extension ViewController{
                 getApiResponse.fetchImageRecommended(urlString: url) { image in
                     if let image = image, let appName = data.AppName {
                         self.recommendedCellData.append(HomeViewCellData(image: image, Label: appName))
+                        self.recommendedDataFiltered.append(data)
                     }
                     group.leave()
                 }
@@ -256,6 +347,7 @@ extension ViewController{
                     getApiResponse.fetchImageFeatured(urlString: url) { image in
                         if let image = image, let appName = data.AppName {
                             self.featuredCellData.append(HomeViewCellData(image: image, Label: appName))
+                            self.featuredDataFiltered.append(data)
                         }
                         group.leave()
                     }

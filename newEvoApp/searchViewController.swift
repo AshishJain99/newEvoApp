@@ -19,8 +19,10 @@ class searchViewController: UIViewController {
     
     var allSearch:[Search] = []
     
-    let getApiResponse = GetApiResponse()
+    var allCategory:[categoryElement]!
     
+    let getApiResponse = GetApiResponse()
+    var searchDisable = false
     var cellHeight:CGFloat = 0
     var cellWidth:CGFloat = 0
     
@@ -32,6 +34,14 @@ class searchViewController: UIViewController {
         let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
         backV.addGestureRecognizer(backButtonTap)
         
+        searchCollectionV.reloadData()
+        
+        if searchDisable == true{
+            searchBar.isHidden = true
+        }
+//        print(allCategory.count)
+        print(searchDisable)
+        print("")
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,35 +65,113 @@ class searchViewController: UIViewController {
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 
 extension searchViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allSearch.count
+        if searchDisable == false{
+            return allSearch.count
+        }else{
+            return allCategory.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
         let cell = searchCollectionV.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! searchCollectionViewCell
-        let url = allSearch[indexPath.item].CoverImage
-        let appName = allSearch[indexPath.item].AppName
-        getApiResponse.getImageFromString(url: url ?? "") {[weak self] image in
-            guard let self = self else{
-                return
-            }
-            cell.imageV.image = image
-        }
         
         cell.labelVWidth.constant = cellWidth
         cell.imageVHeight.constant = cellHeight*0.8
         cell.imageVWidth.constant = cellWidth
         cell.labelVHeight.constant = cellHeight*0.2
-        cell.labelV.text = appName
         
         
-        return cell
+        if searchDisable == false{
+            
+            let url = allSearch[indexPath.item].CoverImage
+            let appName = allSearch[indexPath.item].AppName
+            getApiResponse.getImageFromString(url: url ?? "") {[weak self] image in
+                guard let self = self else{
+                    return
+                }
+                cell.imageV.image = image
+            }
+            cell.labelV.text = appName
+            return cell
+            
+        }else{
+            let url = allCategory[indexPath.item].CoverImage
+            let appName = allCategory[indexPath.item].AppName
+            getApiResponse.getImageFromString(url: url ?? "") {[weak self] image in
+                guard let self = self else{
+                    return
+                }
+                cell.imageV.image = image
+            }
+            cell.labelV.text = appName
+            return cell
+        }
+        
+
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if searchDisable == false{
+            let data = allSearch[indexPath.item]
+            let coverImageUrl = allSearch[indexPath.item].CoverImage
+            var coverImage = UIImage()
+            
+            
+            getApiResponse.fetchImageRecommended(urlString: coverImageUrl ?? "") { image in
+                coverImage = image!
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){[self] in
+                let detailedVcData = detailedVcData(image1Url: data.Screenshot1 ?? "", image2Url: data.Screenshot2 ?? "", image3Url: data.Screenshot3 ?? "", image4Url: data.Screenshot4 ?? "", appName: data.AppName ?? "", devName: data.Author ?? "", appIconUrl: data.Icon ?? "", description: data.Description ?? "", downloadLink: data.IosStoreLink ?? "",price: data.IosINR ?? "",adultRaiting: data.IosInstallCount ?? "", appRating: data.IosRatings ?? "", bgImg: coverImage)
+                
+                
+                if let nextViewController = storyboard!.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController {
+                    
+                    nextViewController.detailedVcData = detailedVcData
+        //                nextViewController.bgImageV =
+                    
+                    // Push the new view controller onto the navigation stack
+                    navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }
+        }else{
+            let data = allCategory[indexPath.item]
+            let coverImageUrl = allCategory[indexPath.item].CoverImage
+            var coverImage = UIImage()
+            
+            
+            getApiResponse.fetchImageRecommended(urlString: coverImageUrl ?? "") { image in
+                coverImage = image!
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){[self] in
+                let detailedVcData = detailedVcData(image1Url: data.Screenshot1 ?? "", image2Url: data.Screenshot2 ?? "", image3Url: data.Screenshot3 ?? "", image4Url: data.Screenshot4 ?? "", appName: data.AppName ?? "", devName: data.Author ?? "", appIconUrl: data.Icon ?? "", description: data.Description ?? "", downloadLink: data.IosStoreLink ?? "",price: data.IosINR ?? "",adultRaiting: data.IosInstallCount ?? "", appRating: data.IosRatings ?? "", bgImg: coverImage)
+                
+                
+                if let nextViewController = storyboard!.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController {
+                    
+                    nextViewController.detailedVcData = detailedVcData
+        //                nextViewController.bgImageV =
+                    
+                    // Push the new view controller onto the navigation stack
+                    navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }
+        }
+
+        
+        
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: cellWidth-5, height: cellHeight)
@@ -118,10 +206,7 @@ extension searchViewController{
                             let ApiResponse = try JSONDecoder().decode(searchResponseApi.self, from: data!)
                             self.allSearch.append(contentsOf: ApiResponse.Search!)
                             
-                            DispatchQueue.main.async {
-                                self.searchCollectionV.reloadData()
-                                //print(apiResponse)
-                            }
+                            
                         }
                         
                         catch{
@@ -134,8 +219,13 @@ extension searchViewController{
             else{
                 print("Parsing problem")
             }
+            DispatchQueue.main.async {
+                self.searchCollectionV.reloadData()
+                //print(apiResponse)
+            }
             
         }.resume()
+        
     }
     
 

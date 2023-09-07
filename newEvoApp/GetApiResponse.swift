@@ -12,8 +12,10 @@ import UIKit
 class GetApiResponse {
     var allRecommended: [Recommended] = []
     var allFeatured:[Featured] = []
+    var allCategoryResponse:[categoryElement]=[]
 
     private func fetchRecommendedData(completion: @escaping ([Recommended]?) -> Void) {
+        
         guard let url = URL(string: "https://privapi.amkette.com/egpapp_v3/iosapi/recomended.php") else {
             completion(nil)
             return
@@ -24,6 +26,7 @@ class GetApiResponse {
                 do {
                     let apiResponse = try JSONDecoder().decode(RecommendedApiResponse.self, from: data)
                     DispatchQueue.main.async {
+                        self.allRecommended.removeAll()
                         self.allRecommended.append(contentsOf: apiResponse.Recommended ?? [])
                         completion(self.allRecommended)
                     }
@@ -89,6 +92,7 @@ class GetApiResponse {
                 do {
                     let apiResponse = try JSONDecoder().decode(featuredApiResponse.self, from: data)
                     DispatchQueue.main.async {
+                        self.allFeatured.removeAll()
                         self.allFeatured.append(contentsOf: apiResponse.Featured!)
                         completion(self.allFeatured)
                     }
@@ -151,6 +155,34 @@ class GetApiResponse {
             }
         }
     }
+    
+    func fetchCategoriesData(category:String,completion: @escaping ([categoryElement]?) -> Void) {
+        
+       guard let url = URL(string: "https://privapi.amkette.com/egpapp_v3/iosapi/category.php?category=\(category)") else {
+           completion(nil)
+           return
+       }
+       
+       URLSession.shared.dataTask(with: url) { data, response, error in
+           if let data = data, error == nil {
+               do {
+                   let apiResponse = try JSONDecoder().decode(CategoryApiResponse.self, from: data)
+                   DispatchQueue.main.async {
+                       self.allCategoryResponse.removeAll()
+                       self.allCategoryResponse.append(contentsOf: apiResponse.Category!)
+                       completion(self.allCategoryResponse)
+                   }
+               } catch {
+                   print("Model Problem")
+                   completion(nil)
+               }
+           } else {
+               print("Parsing problem")
+               completion(nil)
+           }
+       }.resume()
+   }
+    
 }
 
 

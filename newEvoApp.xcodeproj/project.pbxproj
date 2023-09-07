@@ -15,6 +15,22 @@
 		9E328DEC2AA63349006C8D7F /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E328DEB2AA63349006C8D7F /* DetailedViewController.swift */; };
 		9EBD55D92AA9A35900629074 /* searchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55D82AA9A35900629074 /* searchViewController.swift */; };
 		9EBD55DB2AA9A41C00629074 /* searchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55DA2AA9A41C00629074 /* searchCollectionViewCell.swift */; };
+		9EBD55DD2AA9E3AB00629074 /* phone_setup_guide.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD55DC2AA9E3AB00629074 /* phone_setup_guide.gif */; };
+		9EBD55DF2AA9E3B700629074 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD55DE2AA9E3B700629074 /* splash.gif */; };
+		9EBD55E22AA9E3CF00629074 /* evoGoVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD55E12AA9E3CF00629074 /* evoGoVideo.mp4 */; };
+		9EBD55E42AA9E72100629074 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55E32AA9E72100629074 /* LaunchViewController.swift */; };
+		9EBD55E62AA9E9FE00629074 /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55E52AA9E9FE00629074 /* GifLoader.swift */; };
+		9EBD55E92AA9EC2800629074 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9EBD55E82AA9EC2800629074 /* SDWebImage */; };
+		9EBD55EB2AA9EE8200629074 /* splashV.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD55EA2AA9EE8200629074 /* splashV.mp4 */; };
+		9EBD55F12AA9F6E600629074 /* Onboarding2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55F02AA9F6E600629074 /* Onboarding2ViewController.swift */; };
+		9EBD55F32AA9F6F300629074 /* Onboarding1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55F22AA9F6F300629074 /* Onboarding1ViewController.swift */; };
+		9EBD55F52AA9F6FB00629074 /* Onboarding3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55F42AA9F6FB00629074 /* Onboarding3ViewController.swift */; };
+		9EBD55F72AAA05F800629074 /* phone_setup_guideNew.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD55F62AAA05F800629074 /* phone_setup_guideNew.gif */; };
+		9EBD55F92AAA2A6A00629074 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55F82AAA2A6A00629074 /* aboutViewController.swift */; };
+		9EBD55FB2AAA2D2B00629074 /* connectionGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55FA2AAA2D2B00629074 /* connectionGuideViewController.swift */; };
+		9EBD55FD2AAA2E0B00629074 /* ConnectionGuideVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD55FC2AAA2E0B00629074 /* ConnectionGuideVideoViewController.swift */; };
+		9EBD55FF2AAA341500629074 /* evoOneVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD55FE2AAA341500629074 /* evoOneVideo.mp4 */; };
+		9EBD56012AAA402100629074 /* TopBarViewFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD56002AAA402100629074 /* TopBarViewFile.swift */; };
 		9EC175EF2AA459F500F71364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC175EE2AA459F500F71364 /* AppDelegate.swift */; };
 		9EC175F12AA459F500F71364 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC175F02AA459F500F71364 /* SceneDelegate.swift */; };
 		9EC175F32AA459F500F71364 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC175F22AA459F500F71364 /* ViewController.swift */; };
@@ -32,6 +48,21 @@
 		9E328DEB2AA63349006C8D7F /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		9EBD55D82AA9A35900629074 /* searchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchViewController.swift; sourceTree = "<group>"; };
 		9EBD55DA2AA9A41C00629074 /* searchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchCollectionViewCell.swift; sourceTree = "<group>"; };
+		9EBD55DC2AA9E3AB00629074 /* phone_setup_guide.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = phone_setup_guide.gif; sourceTree = "<group>"; };
+		9EBD55DE2AA9E3B700629074 /* splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = splash.gif; sourceTree = "<group>"; };
+		9EBD55E12AA9E3CF00629074 /* evoGoVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = evoGoVideo.mp4; sourceTree = "<group>"; };
+		9EBD55E32AA9E72100629074 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		9EBD55E52AA9E9FE00629074 /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
+		9EBD55EA2AA9EE8200629074 /* splashV.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = splashV.mp4; sourceTree = "<group>"; };
+		9EBD55F02AA9F6E600629074 /* Onboarding2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2ViewController.swift; sourceTree = "<group>"; };
+		9EBD55F22AA9F6F300629074 /* Onboarding1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding1ViewController.swift; sourceTree = "<group>"; };
+		9EBD55F42AA9F6FB00629074 /* Onboarding3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3ViewController.swift; sourceTree = "<group>"; };
+		9EBD55F62AAA05F800629074 /* phone_setup_guideNew.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = phone_setup_guideNew.gif; sourceTree = "<group>"; };
+		9EBD55F82AAA2A6A00629074 /* aboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
+		9EBD55FA2AAA2D2B00629074 /* connectionGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectionGuideViewController.swift; sourceTree = "<group>"; };
+		9EBD55FC2AAA2E0B00629074 /* ConnectionGuideVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionGuideVideoViewController.swift; sourceTree = "<group>"; };
+		9EBD55FE2AAA341500629074 /* evoOneVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = evoOneVideo.mp4; sourceTree = "<group>"; };
+		9EBD56002AAA402100629074 /* TopBarViewFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarViewFile.swift; sourceTree = "<group>"; };
 		9EC175EB2AA459F500F71364 /* newEvoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newEvoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC175EE2AA459F500F71364 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EC175F02AA459F500F71364 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EBD55E92AA9EC2800629074 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +108,13 @@
 				9EC175F02AA459F500F71364 /* SceneDelegate.swift */,
 				9EC175F22AA459F500F71364 /* ViewController.swift */,
 				9EC175F42AA459F500F71364 /* Main.storyboard */,
+				9EBD56002AAA402100629074 /* TopBarViewFile.swift */,
+				9EBD55F82AAA2A6A00629074 /* aboutViewController.swift */,
+				9EBD55F22AA9F6F300629074 /* Onboarding1ViewController.swift */,
+				9EBD55F02AA9F6E600629074 /* Onboarding2ViewController.swift */,
+				9EBD55F42AA9F6FB00629074 /* Onboarding3ViewController.swift */,
+				9EBD55E52AA9E9FE00629074 /* GifLoader.swift */,
+				9EBD55E32AA9E72100629074 /* LaunchViewController.swift */,
 				9EBD55D82AA9A35900629074 /* searchViewController.swift */,
 				9E328DEB2AA63349006C8D7F /* DetailedViewController.swift */,
 				9E328DE32AA479E0006C8D7F /* Models.swift */,
@@ -87,6 +126,14 @@
 				9EC175F72AA459F600F71364 /* Assets.xcassets */,
 				9EC175F92AA459F600F71364 /* LaunchScreen.storyboard */,
 				9EC175FC2AA459F600F71364 /* Info.plist */,
+				9EBD55DC2AA9E3AB00629074 /* phone_setup_guide.gif */,
+				9EBD55DE2AA9E3B700629074 /* splash.gif */,
+				9EBD55FE2AAA341500629074 /* evoOneVideo.mp4 */,
+				9EBD55E12AA9E3CF00629074 /* evoGoVideo.mp4 */,
+				9EBD55FA2AAA2D2B00629074 /* connectionGuideViewController.swift */,
+				9EBD55FC2AAA2E0B00629074 /* ConnectionGuideVideoViewController.swift */,
+				9EBD55EA2AA9EE8200629074 /* splashV.mp4 */,
+				9EBD55F62AAA05F800629074 /* phone_setup_guideNew.gif */,
 			);
 			path = newEvoApp;
 			sourceTree = "<group>";
@@ -107,6 +154,9 @@
 			dependencies = (
 			);
 			name = newEvoApp;
+			packageProductDependencies = (
+				9EBD55E82AA9EC2800629074 /* SDWebImage */,
+			);
 			productName = newEvoApp;
 			productReference = 9EC175EB2AA459F500F71364 /* newEvoApp.app */;
 			productType = "com.apple.product-type.application";
@@ -135,6 +185,9 @@
 				Base,
 			);
 			mainGroup = 9EC175E22AA459F500F71364;
+			packageReferences = (
+				9EBD55E72AA9EC2800629074 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 9EC175EC2AA459F500F71364 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -149,9 +202,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EBD55DD2AA9E3AB00629074 /* phone_setup_guide.gif in Resources */,
 				9EC175FB2AA459F600F71364 /* LaunchScreen.storyboard in Resources */,
+				9EBD55EB2AA9EE8200629074 /* splashV.mp4 in Resources */,
+				9EBD55FF2AAA341500629074 /* evoOneVideo.mp4 in Resources */,
 				9EC175F82AA459F600F71364 /* Assets.xcassets in Resources */,
 				9EC175F62AA459F500F71364 /* Main.storyboard in Resources */,
+				9EBD55F72AAA05F800629074 /* phone_setup_guideNew.gif in Resources */,
+				9EBD55E22AA9E3CF00629074 /* evoGoVideo.mp4 in Resources */,
+				9EBD55DF2AA9E3B700629074 /* splash.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,14 +224,23 @@
 				9E328DE82AA47A50006C8D7F /* categoriesCollectionViewCell.swift in Sources */,
 				9E328DE22AA4732D006C8D7F /* recommendedCollectionViewCell.swift in Sources */,
 				9EC175F32AA459F500F71364 /* ViewController.swift in Sources */,
+				9EBD55F32AA9F6F300629074 /* Onboarding1ViewController.swift in Sources */,
+				9EBD55F12AA9F6E600629074 /* Onboarding2ViewController.swift in Sources */,
 				9E328DE62AA47A42006C8D7F /* featuredCollectionViewCell.swift in Sources */,
+				9EBD56012AAA402100629074 /* TopBarViewFile.swift in Sources */,
 				9EC175EF2AA459F500F71364 /* AppDelegate.swift in Sources */,
+				9EBD55FD2AAA2E0B00629074 /* ConnectionGuideVideoViewController.swift in Sources */,
+				9EBD55FB2AAA2D2B00629074 /* connectionGuideViewController.swift in Sources */,
 				9E328DEC2AA63349006C8D7F /* DetailedViewController.swift in Sources */,
+				9EBD55E62AA9E9FE00629074 /* GifLoader.swift in Sources */,
 				9EBD55D92AA9A35900629074 /* searchViewController.swift in Sources */,
+				9EBD55E42AA9E72100629074 /* LaunchViewController.swift in Sources */,
 				9EBD55DB2AA9A41C00629074 /* searchCollectionViewCell.swift in Sources */,
 				9EC175F12AA459F500F71364 /* SceneDelegate.swift in Sources */,
 				9E328DE42AA479E0006C8D7F /* Models.swift in Sources */,
 				9E328DEA2AA47B23006C8D7F /* GetApiResponse.swift in Sources */,
+				9EBD55F52AA9F6FB00629074 /* Onboarding3ViewController.swift in Sources */,
+				9EBD55F92AAA2A6A00629074 /* aboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +460,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9EBD55E72AA9EC2800629074 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9EBD55E82AA9EC2800629074 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EBD55E72AA9EC2800629074 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9EC175E32AA459F500F71364 /* Project object */;
 }
