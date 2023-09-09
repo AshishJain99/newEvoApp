@@ -51,6 +51,7 @@ class TopBarViewFile{
         //let device = UIDevice.current
         
         UIDevice.current.isBatteryMonitoringEnabled = true
+        let batteryLevel: Float = abs(UIDevice.current.batteryLevel*100)
         let level = Int(abs(UIDevice.current.batteryLevel))*100
         print(level*100)
         
@@ -58,14 +59,16 @@ class TopBarViewFile{
 //            // Battery monitoring is not enabled
 //            return nil
 //        }
-        
-        
-        if level <= 25 {
+        if batteryLevel <= 10 {
+             print("below 10",level)
+             return UIImage(systemName: "battery.0")
+         }
+       else if batteryLevel <= 25 {
             print("below 25",level)
             return UIImage(systemName: "battery.25")
-        } else if level <= 50 {
+        } else if batteryLevel <= 50 {
             return UIImage(systemName: "battery.50")
-        } else if level <= 75 {
+        } else if batteryLevel <= 75  && batteryLevel <= 99{
             return UIImage(systemName: "battery.75")
         }
         return UIImage(systemName: "battery.100")
@@ -79,23 +82,45 @@ class TopBarViewFile{
 //        return formatter.string(from: currentDate)
 //    }
 
-    func getTime()->String{
+//    func getTime()->String{
+//        let today = Date()
+//        var hours = (Calendar.current.component(.hour, from: today))
+//        var minutes = (Calendar.current.component(.minute, from: today))
+//        var newMin = ""
+//        var AM = "AM"
+//
+//        if hours>=12{
+//            hours = hours%12
+//            AM = "PM"
+//            }
+//        if minutes <= 9{
+//            newMin = "0\(minutes)"
+//        }else{
+//            newMin = String(minutes)
+//        }
+//
+//        return "\(hours):\(newMin)\(AM)"
+//    }
+    
+    func getTime() -> String {
         let today = Date()
         var hours = (Calendar.current.component(.hour, from: today))
-        var minutes = (Calendar.current.component(.minute, from: today))
-        var newMin = ""
-        var AM = "AM"
-    
-        if hours>=12{
-            hours = hours%12
-            AM = "PM"
+        let minutes = (Calendar.current.component(.minute, from: today))
+        
+        var timePeriod = "AM"
+        
+        if hours >= 12 {
+            timePeriod = "PM"
+            if hours > 12 {
+                hours -= 12
             }
-        if minutes <= 9{
-            newMin = "0\(minutes)"
-        }else{
-            newMin = String(minutes)
+        } else if hours == 0 {
+            hours = 12  // Midnight should be represented as 12:00 AM
         }
-    
-        return "\(hours):\(newMin)\(AM)"
+        
+        let formattedMinutes = String(format: "%02d", minutes)
+        
+        return "\(hours):\(formattedMinutes) \(timePeriod)"
     }
+
 }

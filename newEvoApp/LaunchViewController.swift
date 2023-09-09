@@ -38,6 +38,8 @@ class LaunchViewController: UIViewController {
         //        }
         NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         
+        NetworkMonitor.shared.startMonitoring()
+        
     }
     
     override func viewDidLayoutSubviews() {

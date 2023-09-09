@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E04DBE72AAB93C100A1E180 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E04DBE62AAB93C100A1E180 /* NetworkMonitor.swift */; };
 		9E328DE22AA4732D006C8D7F /* recommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E328DE12AA4732D006C8D7F /* recommendedCollectionViewCell.swift */; };
 		9E328DE42AA479E0006C8D7F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E328DE32AA479E0006C8D7F /* Models.swift */; };
 		9E328DE62AA47A42006C8D7F /* featuredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E328DE52AA47A42006C8D7F /* featuredCollectionViewCell.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E04DBE62AAB93C100A1E180 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		9E328DE12AA4732D006C8D7F /* recommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		9E328DE32AA479E0006C8D7F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		9E328DE52AA47A42006C8D7F /* featuredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = featuredCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				9EC175F02AA459F500F71364 /* SceneDelegate.swift */,
 				9EC175F22AA459F500F71364 /* ViewController.swift */,
 				9EC175F42AA459F500F71364 /* Main.storyboard */,
+				9E04DBE62AAB93C100A1E180 /* NetworkMonitor.swift */,
 				9EBD56002AAA402100629074 /* TopBarViewFile.swift */,
 				9EBD55F82AAA2A6A00629074 /* aboutViewController.swift */,
 				9EBD55F22AA9F6F300629074 /* Onboarding1ViewController.swift */,
@@ -234,6 +237,7 @@
 				9E328DEC2AA63349006C8D7F /* DetailedViewController.swift in Sources */,
 				9EBD55E62AA9E9FE00629074 /* GifLoader.swift in Sources */,
 				9EBD55D92AA9A35900629074 /* searchViewController.swift in Sources */,
+				9E04DBE72AAB93C100A1E180 /* NetworkMonitor.swift in Sources */,
 				9EBD55E42AA9E72100629074 /* LaunchViewController.swift in Sources */,
 				9EBD55DB2AA9A41C00629074 /* searchCollectionViewCell.swift in Sources */,
 				9EC175F12AA459F500F71364 /* SceneDelegate.swift in Sources */,

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GameController
+
 
 class ViewController: UIViewController {
     
@@ -72,23 +74,33 @@ class ViewController: UIViewController {
         getCategories()
         addButtonAction()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkChange), name: Notification.Name("NetworkConnectionChanged"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(controllerConnected), name: NSNotification.Name.GCControllerDidConnect, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(controllerDisconnected), name: NSNotification.Name.GCControllerDidDisconnect, object: nil)
+
+        handleNetworkChange()
+        checkControllerStatus()
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         let batteryImage = topVData.getBatteryImage()
         let batteryPercent = topVData.getBatteryPercentage()
-        let controllerStatus = topVData.getConsollerStatus()
-        let connectivityType = topVData.getNetworkConnectivityType()
+//        let controllerStatus = topVData.getConsollerStatus()
+//        let connectivityType = topVData.getNetworkConnectivityType()
         let time = topVData.getTime()
         
-        controllerStatusIcon.image = controllerStatus
-        wifiStatusIcon.image = connectivityType
+//        controllerStatusIcon.image = controllerStatus
+//        wifiStatusIcon.image = connectivityType
         batteryStatusIcon.image = batteryImage
         
         batteryPercentLabel.text = batteryPercent
         timeLabel.text = time
     }
+    
     
     
     func addButtonAction(){
@@ -161,8 +173,73 @@ class ViewController: UIViewController {
             // Push the new view controller onto the navigation stack
             navigationController?.pushViewController(nextViewController, animated: true)
         }
+    }
+    
+    @objc func handleNetworkChange() {
+        if NetworkMonitor.shared.isConnected {
+            switch NetworkMonitor.shared.connectionType {
+            case .wifi:
+                print("Connected via WiFi")
+                DispatchQueue.main.async {
+                    self.wifiStatusIcon.image = UIImage(systemName: "wifi")!
+                }
+                
+            case .cellular:
+                DispatchQueue.main.async {
+                    self.wifiStatusIcon.image = UIImage(systemName: "cellularbars")!
+                }
+                print("Connected via Cellular")
+            case .ethernet:
+                print("Connected via Ethernet")
+            default:
+                print("Unknown connection type")
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.wifiStatusIcon.image = UIImage(systemName: "wifi.slash")!
+            }
+            
+            print("Not connected to the internet")
+        }
+    }
+    @objc func controllerConnected(notification: NSNotification) {
+        if let gameController = notification.object as? GCController {
+            // Handle the connected game controller.
+            // You can access gameController properties to know more about the connected controller.
+            print("Game controller connected: \(gameController)")
+            
+
+            controllerStatusIcon.image = UIImage(systemName: "gamecontroller.fill")!
+            showPopup(title: "Controller Connected", message: "Connected to \(gameController.vendorName ?? "")")
+        }
+    }
+
+    @objc func controllerDisconnected(notification: NSNotification) {
+        if let gameController = notification.object as? GCController {
+            // Handle the disconnected game controller.
+            controllerStatusIcon.image = UIImage(named: "GameConsoleNotConnected")!
+            print("Game controller disconnected: \(gameController.vendorName ?? "")")
+            showPopup(title: "Controller Disconnected", message: "\(gameController.vendorName ?? "") Disconnected")
+        }
+    }
+
+    func checkControllerStatus(){
         
+            let connectedControllers = GCController.controllers()
+            if connectedControllers.isEmpty {
+                
+                controllerStatusIcon.image = UIImage(named: "GameConsoleNotConnected")!
+//                print("Game controller disconnected: \(gameController.vendorName ?? "")")
+                showPopup(title: "No Controller Detected",message: "Please connect controller")
+                
+            } else {
+                for controller in connectedControllers {
+                    controllerStatusIcon.image = UIImage(systemName: "gamecontroller.fill")!
+                    showPopup(title: "Controller Connected", message: "Connected to \(controller.vendorName ?? "")")
+                }
+            }
         
+
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
@@ -174,13 +251,37 @@ class ViewController: UIViewController {
             navigationController?.pushViewController(nextViewController, animated: true)
         }
         
-//        print("nextt")
     }
     
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    func showPopup(title:String,message:String) {
+        
+        let title = NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        let message = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        alert.setValue(title, forKey: "attributedTitle")
+        alert.setValue(message, forKey: "attributedMessage")
+        
+        if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+            }
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+    }
+
+    
+    
 }
 
 extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{

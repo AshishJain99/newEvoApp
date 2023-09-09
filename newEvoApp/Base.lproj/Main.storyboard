@@ -103,6 +103,7 @@
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GYa-P4-0cO">
                                                         <rect key="frame" x="0.0" y="0.0" width="47.666666666666664" height="40"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3sb-XM-kB3">
                                                         <rect key="frame" x="56.666666666666629" y="0.0" width="47.666666666666657" height="40"/>
@@ -861,10 +862,15 @@
                         <outlet property="appIcon" destination="zfW-x2-BnS" id="ZMi-tC-11c"/>
                         <outlet property="backButtonView" destination="qHq-fy-5LY" id="IEJ-AT-OM4"/>
                         <outlet property="bgImageV" destination="Wa2-si-7Xu" id="Ifr-iz-GTs"/>
+                        <outlet property="descriptionInfoViewHeight" destination="IuQ-an-zGD" id="3My-eu-KXh"/>
+                        <outlet property="descriptionScrollViewHeight" destination="8df-fJ-43l" id="d57-6L-oyx"/>
                         <outlet property="descriptionTextView" destination="SaR-LH-tVq" id="jz4-I1-QI2"/>
+                        <outlet property="downloadButtonHeight" destination="EOK-Ua-Dc0" id="VY3-iE-aU0"/>
                         <outlet property="downloadButtonView" destination="l3v-7Q-ts3" id="S4M-DL-jvD"/>
                         <outlet property="gameNameLabel" destination="lXh-gt-5eA" id="166-A5-ToH"/>
                         <outlet property="headerViewHeight" destination="hzw-7W-Q84" id="bGq-SS-HZy"/>
+                        <outlet property="imageScrollViewWidthC" destination="Fni-7q-POv" id="k4s-Zm-toW"/>
+                        <outlet property="imageStackViewHeight" destination="UB3-Mb-jXe" id="biA-pr-8c2"/>
                         <outlet property="priceCountLabel" destination="yMg-ET-yFR" id="Uq4-JZ-td7"/>
                         <outlet property="priceView" destination="K1g-mX-2K0" id="DgL-J0-INk"/>
                         <outlet property="ratingsView" destination="HkY-de-tlu" id="HVS-ra-pin"/>

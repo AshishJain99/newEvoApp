@@ -185,6 +185,11 @@ extension searchViewController:UISearchBarDelegate{
         fetchSearchData(text: searchText)
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // Dismiss the keyboard
+        searchBar.resignFirstResponder()
+    }
+
 
 
     

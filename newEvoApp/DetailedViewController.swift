@@ -25,6 +25,11 @@ class DetailedViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var priceView: UIView!
     @IBOutlet weak var ratingsView: UIView!
     
+    @IBOutlet weak var imageStackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var descriptionScrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageScrollViewWidthC: NSLayoutConstraint!
+    @IBOutlet weak var downloadButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var descriptionInfoViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var adultRatingCountLabel: UILabel!
     @IBOutlet weak var RatingCountLabel: UILabel!
@@ -33,13 +38,16 @@ class DetailedViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     
     
-    var detailedVcData:detailedVcData!
+    
     
     @IBOutlet weak var backButtonView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
     
     let getApiResponse = GetApiResponse()
+    var detailedVcData:detailedVcData!
     
+    
+    let deviceType = UIDevice.current.userInterfaceIdiom
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +70,19 @@ class DetailedViewController: UIViewController, UITextViewDelegate {
         
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if deviceType == .pad{
+            imageStackViewHeight.constant = 900
+            descriptionScrollViewHeight.constant = 900
+            imageScrollViewWidthC.constant = 23
+            downloadButtonHeight.constant = 48
+            descriptionInfoViewHeight.constant = 300
+        }
+        
+        
+    }
     
     
     func configureUI(){
