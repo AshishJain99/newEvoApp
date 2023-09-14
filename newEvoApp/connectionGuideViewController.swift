@@ -26,6 +26,8 @@ class connectionGuideViewController: UIViewController {
         
         let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
         backButtonView.addGestureRecognizer(backButtonTap)
+        
+        navigationController?.isNavigationBarHidden = true
     }
     
 
@@ -56,7 +58,20 @@ class connectionGuideViewController: UIViewController {
     }
     
     @objc func backButtonTapped(){
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+//        DispatchQueue.main.async {[self] in
+//            let yourViewController = storyboard?.instantiateViewController(withIdentifier: "ViewController")
+//
+//            // Create a navigation controller with your view controller as the root view controller
+//            let navigationController = UINavigationController(rootViewController: yourViewController!)
+//
+//            // Present the navigation controller
+//            self.present(navigationController, animated: true, completion: nil)
+//        }
+        
+        if let nextViewController = storyboard?.instantiateViewController(withIdentifier: "ViewController") {
+            navigationController?.setViewControllers([nextViewController], animated: true)
+        }
     }
     override var prefersStatusBarHidden: Bool {
         return true

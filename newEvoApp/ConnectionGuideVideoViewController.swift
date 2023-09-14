@@ -29,6 +29,9 @@ class ConnectionGuideVideoViewController: UIViewController {
         let settingButtonTap = UITapGestureRecognizer(target: self, action: #selector(settingsButtonTapped))
         settingButtonView.addGestureRecognizer(settingButtonTap)
         
+        
+        navigationController?.isNavigationBarHidden = true
+
     }
     
     override func viewDidLayoutSubviews() {

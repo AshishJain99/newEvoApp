@@ -211,7 +211,7 @@ class aboutViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        let gettingStartedTapGesture = UITapGestureRecognizer(target: self, action: #selector(gettinStartedTapped(_:)))
+        let gettingStartedTapGesture = UITapGestureRecognizer(target: self, action: #selector(gettingStartedTapped(_:)))
         gettingStartedView.isUserInteractionEnabled = true
         gettingStartedView.addGestureRecognizer(gettingStartedTapGesture)
         
@@ -342,12 +342,25 @@ class aboutViewController: UIViewController {
     }
     
     
-    @objc func gettinStartedTapped(_ sender: UITapGestureRecognizer) {
+    @objc func gettingStartedTapped(_ sender: UITapGestureRecognizer) {
         // Handle the tap gesture here
         print("gettinStartedTapped")
-        if let url = URL(string: "https://www.amkette.com/pages/evofox-one-gamepad") {
-            UIApplication.shared.open(url)
+//        if let url = URL(string: "https://www.amkette.com/pages/evofox-one-gamepad") {
+//            UIApplication.shared.open(url)
+//        }
+        // Instantiate the view controller from the storyboard
+//        let yourViewController = storyboard?.instantiateViewController(withIdentifier: "Onboarding1ViewController")
+//
+//        // Create a navigation controller with your view controller as the root view controller
+//        let navigationController = UINavigationController(rootViewController: yourViewController!)
+//
+//        // Present the navigation controller
+//        self.present(navigationController, animated: true, completion: nil)
+        
+        if let nextViewController = storyboard?.instantiateViewController(withIdentifier: "Onboarding1ViewController") {
+            navigationController?.setViewControllers([nextViewController], animated: true)
         }
+
     }
     @objc func contactUsTapped(_ sender: UITapGestureRecognizer) {
         // Handle the tap gesture here
@@ -396,8 +409,11 @@ class aboutViewController: UIViewController {
         //        if let url = URL(string: "https://www.example.com") {
         //            UIApplication.shared.open(url)
         //        }
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "connectionGuideViewController") as? connectionGuideViewController {
-            self.navigationController?.pushViewController(vc, animated: true)
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "connectionGuideViewController") as? connectionGuideViewController {
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+        if let nextViewController = storyboard?.instantiateViewController(withIdentifier: "connectionGuideViewController") {
+            navigationController?.setViewControllers([nextViewController], animated: true)
         }
         
     }

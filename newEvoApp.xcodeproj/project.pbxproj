@@ -394,6 +394,7 @@
 				DEVELOPMENT_TEAM = 29M4S87GY3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = newEvoApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "EvoFox Dojo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -423,6 +424,7 @@
 				DEVELOPMENT_TEAM = 29M4S87GY3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = newEvoApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "EvoFox Dojo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

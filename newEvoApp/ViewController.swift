@@ -87,6 +87,10 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        iconUpdate()
+    }
+    
+    func iconUpdate(){
         let batteryImage = topVData.getBatteryImage()
         let batteryPercent = topVData.getBatteryPercentage()
 //        let controllerStatus = topVData.getConsollerStatus()
@@ -100,8 +104,6 @@ class ViewController: UIViewController {
         batteryPercentLabel.text = batteryPercent
         timeLabel.text = time
     }
-    
-    
     
     func addButtonAction(){
         let evoButtonTapGesture = UITapGestureRecognizer(target: self, action: #selector(evoButtonTapped))
@@ -149,6 +151,24 @@ class ViewController: UIViewController {
         }
     }
     
+    func checkControllerStatus(){
+        
+            let connectedControllers = GCController.controllers()
+            if connectedControllers.isEmpty {
+                
+                controllerStatusIcon.image = UIImage(named: "GameConsoleNotConnected")!
+//                print("Game controller disconnected: \(gameController.vendorName ?? "")")
+                showPopup(title: "No Controller Detected",message: "Please connect controller")
+                
+            } else {
+                for controller in connectedControllers {
+                    controllerStatusIcon.image = UIImage(systemName: "gamecontroller.fill")!
+                    showPopup(title: "Controller Connected", message: "Connected to \(controller.vendorName ?? "")")
+                }
+            }
+        
+
+    }
     
     @objc func evoButtonTapped(){
         
@@ -222,63 +242,7 @@ class ViewController: UIViewController {
             showPopup(title: "Controller Disconnected", message: "\(gameController.vendorName ?? "") Disconnected")
         }
     }
-
-    func checkControllerStatus(){
-        
-            let connectedControllers = GCController.controllers()
-            if connectedControllers.isEmpty {
-                
-                controllerStatusIcon.image = UIImage(named: "GameConsoleNotConnected")!
-//                print("Game controller disconnected: \(gameController.vendorName ?? "")")
-                showPopup(title: "No Controller Detected",message: "Please connect controller")
-                
-            } else {
-                for controller in connectedControllers {
-                    controllerStatusIcon.image = UIImage(systemName: "gamecontroller.fill")!
-                    showPopup(title: "Controller Connected", message: "Connected to \(controller.vendorName ?? "")")
-                }
-            }
-        
-
-    }
     
-    @IBAction func nextButtonPressed(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "searchViewController") as? searchViewController {
-
-            // Push the new view controller onto the navigation stack
-            navigationController?.pushViewController(nextViewController, animated: true)
-        }
-        
-    }
-    
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    func showPopup(title:String,message:String) {
-        
-        let title = NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-        let message = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-
-        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        alert.setValue(title, forKey: "attributedTitle")
-        alert.setValue(message, forKey: "attributedMessage")
-        
-        if let popoverController = alert.popoverPresentationController {
-                popoverController.sourceView = self.view
-                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-                popoverController.permittedArrowDirections = []
-            }
-            
-            self.present(alert, animated: true, completion: nil)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                alert.dismiss(animated: true, completion: nil)
-            }
-    }
 
     
     
@@ -498,5 +462,34 @@ extension ViewController{
             }
             
         }
+    }
+}
+
+// extra func
+extension ViewController{
+    func showPopup(title:String,message:String) {
+        
+        let title = NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        let message = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        alert.setValue(title, forKey: "attributedTitle")
+        alert.setValue(message, forKey: "attributedMessage")
+        
+        if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+            }
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

@@ -47,7 +47,7 @@ class Onboarding3ViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "onboardingCompleted")
 
         
-        if let nextViewController = storyboard?.instantiateViewController(withIdentifier: "ViewController") {
+        if let nextViewController = storyboard?.instantiateViewController(withIdentifier: "connectionGuideViewController") {
             navigationController?.setViewControllers([nextViewController], animated: true)
         }
     }
