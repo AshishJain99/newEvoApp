@@ -127,7 +127,12 @@ extension DetailedViewController{
         adultRatingCountLabel.text = data?.adultRaiting
         RatingCountLabel.text = data?.appRating
         if let price = data?.price{
-            priceCountLabel.text = price+" ₹"
+            if price == "0"{
+                priceCountLabel.text = "FREE"
+            }else{
+                priceCountLabel.text = "₹ "+price
+            }
+            
         }
         descriptionTextView.text = data?.description
         
